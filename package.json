@@ -1,5 +1,5 @@
 {
-  "name": "boilermaker",
+  "name": "virtuecon",
   "version": "1.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -33,7 +33,7 @@
       "git add"
     ]
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Daniel Kerr",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
