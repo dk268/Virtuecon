@@ -4,16 +4,17 @@ import Axios from 'axios';
 
 export default class AllDevelopers extends Component {
   constructor(props) {
+    super(props);
     this.state = { loadingState: `LOADING`, devs: [], halfSeconds: 0 };
   }
   componentDidMount = async () => {
-    const allDevs = await Axios.get(`/api/developers`);
-    this.setState({ devs: [] });
     setTimeout(() => this.setState({ loadingState: `LOADED` }), 3000);
     const removeMe = setInterval(
       () => this.setState({ halfSeconds: this.state.halfSeconds + 1 }),
       400
     );
+    const allDevs = await Axios.get(`/api/developers`);
+    this.setState({ devs: allDevs.data });
   };
 
   render = () => {
@@ -31,6 +32,7 @@ export default class AllDevelopers extends Component {
             <h1>
               {this.state.devs[1].firstName + ' ' + this.state.devs[1].lastName}
             </h1>
+            <img src={this.state.devs[1].imageURL} />
           </div>
         );
       }
