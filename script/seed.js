@@ -19,6 +19,13 @@ async function seed() {
       lastName: `Tricksy`,
       firstName: `Atlantean`,
     }),
+    Developer.create({
+      lastName: `Melcone`,
+      firstName: `Michael`,
+      imageURL: `http://goblinware.games/wp-content/uploads/2017/10/Myke-e1509219822962.jpg`,
+      roles: `CO-FOUNDER, PROGRAMMER, PROCRASTINATOR`,
+      shortDescription: `This INTP guy is paralyzed by deep thought, but if you can get him to do anything, he's generally expert to a fault.`,
+    }),
   ]);
   console.log(`seeded ${developers.length} devs`);
   console.log(`seeded successfully`);
