@@ -41,6 +41,10 @@ const allDevelopers = (state = initialState, action) => {
           developer => developer.id != action.payload.id
         ),
       };
+    case ERROR_DEVELOPERS:
+      return { ...state, status: ERROR };
+    default:
+      return state;
   }
 };
 
