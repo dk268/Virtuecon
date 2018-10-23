@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Axios from 'axios';
 import { getDevelopers, addDeveloper } from '../store/allDevelopers';
 import { UNASKED, LOADING, LOADED, ERROR } from '../store';
 
@@ -16,7 +15,7 @@ class AllDevelopers extends Component {
       400
     );
     await this.props.getDevelopers();
-    removeMe();
+    clearInterval(removeMe);
   };
 
   render = () => {
@@ -24,7 +23,7 @@ class AllDevelopers extends Component {
     for (let i = 0; i < this.state.halfSeconds + 3; i++) {
       periods += '.';
     }
-    switch (this.state.loadingState) {
+    switch (this.props.status) {
       case UNASKED:
         return <h1>No one wants to see any developers, I guess...</h1>;
       case LOADING: {
@@ -44,11 +43,13 @@ class AllDevelopers extends Component {
           </div>
         );
       }
+      case ERROR: {
+        return <h1>We have an error...</h1>;
+      }
+      default: {
+        return <h2>hit default state</h2>;
+      }
     }
-  };
-
-  componentWillUnmount = () => {
-    removeMe();
   };
 }
 
