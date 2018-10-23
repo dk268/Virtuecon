@@ -32,6 +32,10 @@ const allDeveloper = (state = initialState, action) => {
         status: LOADING,
         collection: action.payload,
       };
+    case ERROR_DEVELOPER:
+      return { ...state, status: ERROR };
+    default:
+      return state;
   }
 };
 
