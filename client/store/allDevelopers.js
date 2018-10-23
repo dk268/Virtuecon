@@ -33,6 +33,19 @@ export const addDeveloper = developer => async dispatch => {
   }
 };
 
+export const deleteDeveloper = id => async dispatch => {
+  try {
+    dispatch(aCF(LOADING_DEVELOPERS));
+    dispatch(aCF(DELETE_DEVELOPER, id));
+    const remainingDevelopers = await Axios.delete(`/api/developers/${id}`);
+    // RELOAD?
+    dispatch(aCF(LOADED_DEVELOPERS, remainingDevelopers));
+    return remainingDevelopers;
+  } catch (e) {
+    dispatch(aCF(ERROR_DEVELOPERS, e));
+  }
+};
+
 const initialState = { status: UNASKED, collection: [] };
 
 const allDevelopers = (state = initialState, action) => {
