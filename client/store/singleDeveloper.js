@@ -18,9 +18,22 @@ export const getDeveloper = id => async dispatch => {
   }
 };
 
+export const editDeveloper = developerData => async dispatch => {
+  try {
+    dispatch(aCF(EDIT_DEVELOPER, developerData));
+    const editedDeveloper = await Axios.put(
+      `/api/developers/${developerData.id}`,
+      developerData
+    );
+    dispatch(aCF(LOADED_DEVELOPER, editedDeveloper.data));
+  } catch (e) {
+    dispatch(aCF(ERROR_DEVELOPER, e));
+  }
+};
+
 const initialState = { status: UNASKED, collection: {} };
 
-const allDeveloper = (state = initialState, action) => {
+const singleDeveloper = (state = initialState, action) => {
   switch (action.type) {
     case LOADING_DEVELOPER:
       return { ...state, status: LOADING };
@@ -30,7 +43,7 @@ const allDeveloper = (state = initialState, action) => {
       return {
         ...state,
         status: LOADING,
-        collection: action.payload,
+        collection: { ...state.collection, ...action.payload },
       };
     case ERROR_DEVELOPER:
       return { ...state, status: ERROR };
@@ -39,4 +52,4 @@ const allDeveloper = (state = initialState, action) => {
   }
 };
 
-export default allDeveloper;
+export default singleDeveloper;

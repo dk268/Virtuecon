@@ -39,8 +39,8 @@ export const deleteDeveloper = id => async dispatch => {
     dispatch(aCF(DELETE_DEVELOPER, id));
     const remainingDevelopers = await Axios.delete(`/api/developers/${id}`);
     // RELOAD?
-    dispatch(aCF(LOADED_DEVELOPERS, remainingDevelopers));
-    return remainingDevelopers;
+    dispatch(aCF(LOADED_DEVELOPERS, remainingDevelopers.data));
+    return remainingDevelopers.data;
   } catch (e) {
     dispatch(aCF(ERROR_DEVELOPERS, e));
   }
