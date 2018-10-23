@@ -10,9 +10,9 @@ const EDIT_DEVELOPER = `EDIT_` + DIRECT_OBJECT;
 export const getDeveloper = id => async dispatch => {
   try {
     dispatch(aCF(LOADING_DEVELOPER));
-    const allDeveloper = await Axios.get(`/api/developers/${id}`);
-    dispatch(aCF(LOADED_DEVELOPER, allDeveloper.data));
-    return allDeveloper.data;
+    const singleDeveloper = await Axios.get(`/api/developers/${id}`);
+    dispatch(aCF(LOADED_DEVELOPER, singleDeveloper.data));
+    return singleDeveloper.data;
   } catch (e) {
     dispatch(aCF(ERROR_DEVELOPER, e));
   }
@@ -26,6 +26,7 @@ export const editDeveloper = developerData => async dispatch => {
       developerData
     );
     dispatch(aCF(LOADED_DEVELOPER, editedDeveloper.data));
+    return editedDeveloper.data;
   } catch (e) {
     dispatch(aCF(ERROR_DEVELOPER, e));
   }
