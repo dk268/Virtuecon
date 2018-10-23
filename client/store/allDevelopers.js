@@ -19,6 +19,20 @@ export const getDevelopers = () => async dispatch => {
   }
 };
 
+export const addDeveloper = developer => async dispatch => {
+  try {
+    dispatch(aCF(LOADING_DEVELOPERS));
+    const newDeveloper = await Axios.post(`/api/developers`, developer);
+    dispatch(aCF(ADD_DEVELOPER, newDeveloper));
+    // RELOAD?
+    const allDevelopers = await Axios.get(`/api/developers`);
+    dispatch(aCF(LOADED_DEVELOPERS, allDevelopers.data));
+    return allDevelopers.data;
+  } catch (e) {
+    dispatch(aCF(ERROR_DEVELOPERS, e));
+  }
+};
+
 const initialState = { status: UNASKED, collection: [] };
 
 const allDevelopers = (state = initialState, action) => {
