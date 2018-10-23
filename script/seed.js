@@ -18,6 +18,7 @@ async function seed() {
     Developer.create({
       lastName: `Tricksy`,
       firstName: `Atlantean`,
+      imageURL: `https://i.imgur.com/iWKad22.jpg`,
     }),
     Developer.create({
       lastName: `Melcone`,
